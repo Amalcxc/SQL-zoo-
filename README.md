@@ -2,8 +2,6 @@
 
 ![](https://img.shields.io/badge/Microverse-blueviolet)
 
-![](https://img.shields.io/badge/Microverse-blueviolet)
-
 ## SQL 
 
 > This is a project made with SQL to create a series of Answers, included are:
