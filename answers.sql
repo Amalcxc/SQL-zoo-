@@ -102,3 +102,90 @@ SELECT yr, subject
  WHERE winner IN ('Theodore Roosevelt',
                   'Woodrow Wilson',
                   'Jimmy Carter', 'Barack Obama')
+
+
+SELECT winner FROM nobel
+ WHERE winner LIKE 'John%' 
+
+SELECT yr, subject, winner
+  FROM nobel
+ WHERE (subject = 'Physics' AND yr =1980) OR (subject = 'Chemistry' AND yr = 1984)
+  
+
+SELECT yr, subject, winner
+  FROM nobel
+ WHERE yr = 1980 AND subject != 'Chemistry' AND subject !=  'Medicine'
+
+ SELECT yr, subject, winner
+  FROM nobel
+  WHERE (subject = 'Medicine' AND yr < 1910) OR (subject = 'Literature' AND yr >= 2004) 
+
+  SELECT *
+  FROM nobel
+  WHERE winner ='PETER GRÜNBERG'
+
+SELECT *
+  FROM nobel
+  WHERE winner = 'EUGENE O''NEILL'
+
+
+SELECT winner, yr, subject
+  FROM nobel
+  WHERE winner LIKE 'Sir%'
+  ORDER BY yr DESC, winner ASC;
+
+
+SELECT winner, yr, subject
+  FROM nobel
+  WHERE winner LIKE 'Sir%'
+  ORDER BY yr DESC, winner ASC;
+
+SELECT winner, subject
+  FROM nobel
+ WHERE yr=1984
+ ORDER BY 
+ CASE WHEN subject IN ('Physics','Chemistry') THEN 1 ELSE 0 END,
+ subject, winner;
+
+    /*
+*****TUTORIAL 4*****
+*/
+
+SELECT name FROM world
+  WHERE population >
+     (SELECT population FROM world
+      WHERE name='Russia')
+
+
+SELECT name 
+FROM world 
+WHERE continent ='Europe'  AND gdp/population > (SELECT gdp/population FROM world WHERE name='United Kingdom')
+
+
+SELECT name, continent
+FROM world
+WHERE continent = (SELECT continent FROM world WHERE name = 'Argentina')
+  OR continent = (SELECT continent FROM world WHERE name = 'Australia')
+ORDER BY name
+
+SELECT name, population
+FROM world
+WHERE population > (SELECT population FROM world WHERE name = 'Canada')
+  AND population < (SELECT population FROM world WHERE name = 'Poland')
+
+
+SELECT name, CONCAT(CONVERT(INT, ROUND((population/
+    (SELECT population 
+    FROM world 
+    WHERE name = 'Germany')) * 100, 0)), '%') 
+FROM world
+WHERE continent = 'Europe';
+
+SELECT name
+FROM world
+WHERE gdp > (SELECT MAX(gdp)
+               FROM world
+              WHERE continent = 'Europe')
+
+
+
