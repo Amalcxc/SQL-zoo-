@@ -17,7 +17,7 @@
 
 ## Built With
 
-- Ruby
+- SQL
 
 ## Getting Started
 
