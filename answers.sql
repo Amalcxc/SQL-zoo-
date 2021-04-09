@@ -188,4 +188,23 @@ WHERE gdp > (SELECT MAX(gdp)
               WHERE continent = 'Europe')
 
 
+SELECT continent, name, area FROM world x
+  WHERE area >= ALL(SELECT area FROM world y WHERE y.continent=x.continent
+          AND area>0);
+
+
+
+SELECT continent, name FROM world x
+  WHERE name = ALL(SELECT TOP 1 name FROM world y WHERE y.continent=x.continent);
+
+
+SELECT name, continent, population
+  FROM world x 
+  WHERE 25000000 >= ALL(SELECT population FROM world y WHERE x.continent = y.continent 
+       AND population > 0)
+
+SELECT name, continent
+FROM world x
+WHERE population > ALL(SELECT population*3 FROM world y WHERE x.continent = y.continent AND y.name != x.name)
+
 
